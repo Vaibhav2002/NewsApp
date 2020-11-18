@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.newsappmvvm.databinding.NewsItemBinding
 import com.example.newsappmvvm.modelData.Article
 
-class SavedAdapter(private val onItemClickListener: onItemClickListener) :
-    ListAdapter<Article, SavedAdapter.SavedNewsViewHolder>(diff()) {
+class SavedNewsAdapter(private val onItemClickListener: onItemClickListener) :
+    ListAdapter<Article, SavedNewsAdapter.SavedNewsViewHolder>(diff()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SavedNewsViewHolder {
         return SavedNewsViewHolder.from(parent)

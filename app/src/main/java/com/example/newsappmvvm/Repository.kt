@@ -1,6 +1,7 @@
 package com.example.newsappmvvm
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.newsappmvvm.Remote.Retrofit
@@ -28,9 +29,7 @@ class Repository(context: Context) {
     }
 
     //local data source functions
-     fun getAllSavedNews(): LiveData<List<Article>> {
-        return database.Dao.getAllArticles()
-    }
+     fun getAllSavedNews()= database.Dao.getAllArticles()
 
     suspend fun saveNewsIntoDB(article: Article){
         withContext(Dispatchers.IO){

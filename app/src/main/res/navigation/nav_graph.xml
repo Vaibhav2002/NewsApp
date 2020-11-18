@@ -42,7 +42,7 @@
         android:label="fragment_news_website"
         tools:layout="@layout/fragment_news_website">
         <argument
-            android:name="Article"
+            android:name="article"
             app:argType="com.example.newsappmvvm.modelData.Article" />
     </fragment>
 </navigation>

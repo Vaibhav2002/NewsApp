@@ -41,5 +41,7 @@ class TrendingFragment : Fragment(), onItemClickListener {
     }
 
     override fun onItemClick(article: Article) {
+        val action=TrendingFragmentDirections.actionTrendingFragmentToNewsWebsiteFragment(article = article)
+        findNavController().navigate(action)
     }
 }

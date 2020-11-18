@@ -20,11 +20,11 @@ class NewsWebsiteFragment : Fragment() {
     ): View? {
         val viewModel = (activity as MainActivity).viewModel
         val binding = FragmentNewsWebsiteBinding.inflate(inflater, container, false)
-        val article = NewsWebsiteFragmentArgs.fromBundle(requireArguments()).Article
+        val article = NewsWebsiteFragmentArgs.fromBundle(requireArguments()).article
         binding.webView.apply {
             settings.javaScriptEnabled = true
             webViewClient = WebViewClient()
-            loadUrl(article.url)
+            loadUrl(article.url!!)
         }
 
         binding.saveNewsBtn.setOnClickListener {

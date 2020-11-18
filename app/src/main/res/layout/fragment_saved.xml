@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         tools:listitem="@layout/news_item"
         android:padding="8dp"
-        android:id="@+id/recycle"
+        android:id="@+id/recyclerView"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
 </FrameLayout>

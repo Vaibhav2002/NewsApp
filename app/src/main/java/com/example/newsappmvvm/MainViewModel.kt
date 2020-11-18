@@ -1,23 +1,24 @@
 package com.example.newsappmvvm
 
-import androidx.lifecycle.*
-import com.example.newsappmvvm.local_db.NewsDatabase
+import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.newsappmvvm.modelData.Article
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class MainViewModel(private val repo: Repository) : ViewModel() {
 
     private var _trendingNews: MutableLiveData<List<Article>> = MutableLiveData()
-    private var _searchNews:MutableLiveData<List<Article>> = MutableLiveData()
-    private var _savedNews:MutableLiveData<List<Article>> = MutableLiveData()
-    val trendingNews get() = _trendingNews
-    val searchNews get() = _searchNews
-    val savedNews get() = _savedNews
+    private var _searchNews: MutableLiveData<List<Article>> = MutableLiveData()
+    val trendingNews: LiveData<List<Article>> get() = _trendingNews
+    val searchNews: LiveData<List<Article>> get() = _searchNews
+
     init {
         getData()
     }
+
     fun getData() {
         viewModelScope.launch {
             val response = repo.getAllNews()
@@ -26,26 +27,23 @@ class MainViewModel(private val repo: Repository) : ViewModel() {
         }
     }
 
-    fun searchNews(query:String){
+    fun searchNews(query: String) {
         viewModelScope.launch {
-            val response=repo.searchNews(query)
-            if(response.isSuccessful&&response.body()!=null)
-                _searchNews.value=response.body()!!.articles
+            val response = repo.searchNews(query)
+            if (response.isSuccessful && response.body() != null)
+                _searchNews.value = response.body()!!.articles
         }
     }
 
-     fun getAllSavedNews(){
-        viewModelScope.launch {
-            _savedNews.value=repo.getAllSavedNews().value
-        }
-    }
+    fun getAllSavedNews()=repo.getAllSavedNews()
 
-     fun saveNewsIntoDB(article: Article){
+    fun saveNewsIntoDB(article: Article) {
         viewModelScope.launch {
             repo.saveNewsIntoDB(article)
         }
     }
-     fun deleteNews(article: Article){
+
+    fun deleteNews(article: Article) {
         viewModelScope.launch {
             repo.deleteNews(article)
         }

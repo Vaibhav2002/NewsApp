@@ -19,6 +19,7 @@ import com.example.newsappmvvm.MainViewModel
 import com.example.newsappmvvm.R
 import com.example.newsappmvvm.databinding.FragmentSearchBinding
 import com.example.newsappmvvm.modelData.Article
+import com.example.newsappmvvm.trendingPage.TrendingFragmentDirections
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
@@ -69,6 +70,7 @@ class SearchFragment : Fragment(), onItemClickListener {
     }
 
     override fun onItemClick(article: Article) {
-
+        val action= SearchFragmentDirections.actionSearchFragmentToNewsWebsiteFragment(article = article)
+        findNavController().navigate(action)
     }
 }
