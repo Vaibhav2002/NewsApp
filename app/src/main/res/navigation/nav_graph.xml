@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/trendingFragment">
+
+    <fragment
+        android:id="@+id/trendingFragment"
+        android:name="com.example.newsappmvvm.trendingPage.TrendingFragment"
+        android:label="Trending"
+        tools:layout="@layout/fragment_trending">
+        <action
+            android:id="@+id/action_trendingFragment_to_newsWebsiteFragment"
+            app:destination="@id/newsWebsiteFragment">
+            <argument
+                android:name="articleUrl"
+                android:defaultValue='"null"' />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/savedFragment"
+        android:name="com.example.newsappmvvm.savedPage.SavedFragment"
+        android:label="Saved"
+        tools:layout="@layout/fragment_saved">
+        <action
+            android:id="@+id/action_savedFragment_to_newsWebsiteFragment"
+            app:destination="@id/newsWebsiteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.newsappmvvm.searchPage.SearchFragment"
+        android:label="Search"
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_searchFragment_to_newsWebsiteFragment"
+            app:destination="@id/newsWebsiteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newsWebsiteFragment"
+        android:name="com.example.newsappmvvm.browserPage.NewsWebsiteFragment"
+        android:label="fragment_news_website"
+        tools:layout="@layout/fragment_news_website">
+        <argument
+            android:name="Article"
+            app:argType="com.example.newsappmvvm.modelData.Article" />
+    </fragment>
+</navigation>
