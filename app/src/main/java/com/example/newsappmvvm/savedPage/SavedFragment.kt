@@ -65,8 +65,10 @@ class SavedFragment : Fragment(), onItemClickListener {
 
 
     override fun onItemClick(article: Article) {
-        val action =
-            SavedFragmentDirections.actionSavedFragmentToNewsWebsiteFragment(article = article)
-        findNavController().navigate(action)
+        findNavController().navigate(
+            SavedFragmentDirections.actionSavedFragmentToNewsWebsiteFragment(
+                article
+            )
+        )
     }
 }

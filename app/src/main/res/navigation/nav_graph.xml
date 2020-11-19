@@ -39,7 +39,7 @@
     <fragment
         android:id="@+id/newsWebsiteFragment"
         android:name="com.example.newsappmvvm.browserPage.NewsWebsiteFragment"
-        android:label="fragment_news_website"
+        android:label="Article"
         tools:layout="@layout/fragment_news_website">
         <argument
             android:name="article"

@@ -9,7 +9,6 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.newsappmvvm.MainActivity
 import com.example.newsappmvvm.MainViewModel
-import com.example.newsappmvvm.R
 import com.example.newsappmvvm.databinding.FragmentTrendingBinding
 import com.example.newsappmvvm.modelData.Article
 
@@ -41,7 +40,10 @@ class TrendingFragment : Fragment(), onItemClickListener {
     }
 
     override fun onItemClick(article: Article) {
-        val action=TrendingFragmentDirections.actionTrendingFragmentToNewsWebsiteFragment(article = article)
-        findNavController().navigate(action)
+        findNavController().navigate(
+            TrendingFragmentDirections.actionTrendingFragmentToNewsWebsiteFragment(
+                article = article
+            )
+        )
     }
 }

@@ -1,6 +1,5 @@
 package com.example.newsappmvvm
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -47,6 +46,10 @@ class MainViewModel(private val repo: Repository) : ViewModel() {
         viewModelScope.launch {
             repo.deleteNews(article)
         }
+    }
+
+    fun clearSearchData() {
+        _searchNews.value = emptyList()
     }
 
 
