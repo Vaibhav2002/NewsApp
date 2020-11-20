@@ -27,8 +27,9 @@ class TrendingFragment : Fragment(), onItemClickListener {
         viewModel = (activity as MainActivity).viewModel
         adapter = NewsAdapter(this)
         binding.recycle.adapter = adapter
+        binding.recycle.setHasFixedSize(true)
         viewModel.trendingNews.observe(viewLifecycleOwner, Observer {
-            adapter.submitList(it)
+            adapter.submitData(viewLifecycleOwner.lifecycle, it)
         })
 
         binding.refresh.setOnRefreshListener {

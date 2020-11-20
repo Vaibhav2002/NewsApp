@@ -12,11 +12,9 @@
         tools:layout="@layout/fragment_trending">
         <action
             android:id="@+id/action_trendingFragment_to_newsWebsiteFragment"
-            app:destination="@id/newsWebsiteFragment">
-            <argument
-                android:name="articleUrl"
-                android:defaultValue='"null"' />
-        </action>
+            app:destination="@id/newsWebsiteFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/savedFragment"
@@ -25,7 +23,9 @@
         tools:layout="@layout/fragment_saved">
         <action
             android:id="@+id/action_savedFragment_to_newsWebsiteFragment"
-            app:destination="@id/newsWebsiteFragment" />
+            app:destination="@id/newsWebsiteFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -34,7 +34,9 @@
         tools:layout="@layout/fragment_search">
         <action
             android:id="@+id/action_searchFragment_to_newsWebsiteFragment"
-            app:destination="@id/newsWebsiteFragment" />
+            app:destination="@id/newsWebsiteFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/newsWebsiteFragment"

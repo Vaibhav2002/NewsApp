@@ -1,22 +1,22 @@
 package com.example.newsappmvvm.trendingPage
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.ListAdapter
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.newsappmvvm.modelData.Article
 import com.example.newsappmvvm.databinding.NewsItemBinding
+import com.example.newsappmvvm.modelData.Article
 
-class NewsAdapter(private val onItemClickListener: onItemClickListener) : ListAdapter<Article, NewsAdapter.NewsViewHolder>(diff()) {
+class NewsAdapter(private val onItemClickListener: onItemClickListener) :
+    PagingDataAdapter<Article, NewsAdapter.NewsViewHolder>(diff()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
         return NewsViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
-        holder.bind(getItem(position),onItemClickListener)
+        getItem(position)?.let { holder.bind(it, onItemClickListener) }
     }
 
     class NewsViewHolder private constructor(private val binding: NewsItemBinding) :

@@ -9,6 +9,13 @@
     <color name="white">#FFFFFFFF</color>
 
 
+    <color name="redDark">#ED474A</color>
+    <color name="redLight">#AF5D63</color>
+    <color name="purpleLight">#846075</color>
+    <color name="teal">#4A6C6F</color>
+    <color name="appBg">#C0BCB5</color>
+
+
     <color name="searchColorLight">@android:color/background_light</color>
     <color name="searchColorDark">#5E5E5E</color>
 </resources>
