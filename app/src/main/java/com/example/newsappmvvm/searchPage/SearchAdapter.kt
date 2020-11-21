@@ -16,7 +16,7 @@ class SearchAdapter(private val onItemClickListener: onItemClickListener) :
     }
 
     override fun onBindViewHolder(holder: SearchNewsViewHolder, position: Int) {
-        holder.bind(getItem(position), onItemClickListener)
+        getItem(position)?.let { holder.bind(it, onItemClickListener) }
     }
 
     class SearchNewsViewHolder private constructor(private val binding: NewsItemBinding) :

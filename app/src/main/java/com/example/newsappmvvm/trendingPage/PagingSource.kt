@@ -1,4 +1,4 @@
-package com.example.newsappmvvm
+package com.example.newsappmvvm.trendingPage
 
 import androidx.paging.PagingSource
 import com.example.newsappmvvm.Remote.NewsApi

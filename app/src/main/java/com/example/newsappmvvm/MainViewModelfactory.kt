@@ -1,11 +1,14 @@
 package com.example.newsappmvvm
 
+import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.newsappmvvm.local_db.NewsDatabase
 
-class MainViewModelfactory(private val repository: Repository) :ViewModelProvider.Factory {
+class MainViewModelfactory(
+    private val repository: Repository,
+    private val application: Application
+) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return MainViewModel(repository) as T
+        return MainViewModel(repository, application) as T
     }
 }

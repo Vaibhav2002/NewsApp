@@ -11,10 +11,13 @@ import com.example.newsappmvvm.MainActivity
 import com.example.newsappmvvm.MainViewModel
 import com.example.newsappmvvm.databinding.FragmentTrendingBinding
 import com.example.newsappmvvm.modelData.Article
+import com.google.android.material.snackbar.Snackbar
 
 class TrendingFragment : Fragment(), onItemClickListener {
     private lateinit var viewModel: MainViewModel
     private lateinit var adapter: NewsAdapter
+    private lateinit var binding: FragmentTrendingBinding
+    private lateinit var snackbar: Snackbar
 
 
     override fun onCreateView(
@@ -23,7 +26,7 @@ class TrendingFragment : Fragment(), onItemClickListener {
         savedInstanceState: Bundle?
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        val binding = FragmentTrendingBinding.inflate(inflater, container, false)
+        binding = FragmentTrendingBinding.inflate(inflater, container, false)
         viewModel = (activity as MainActivity).viewModel
         adapter = NewsAdapter(this)
         binding.recycle.adapter = adapter

@@ -1,15 +1,18 @@
 package com.example.newsappmvvm
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.newsappmvvm.modelData.Article
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val repo: Repository) : ViewModel() {
+class MainViewModel(private val repo: Repository, val applicationC: Application) : AndroidViewModel(
+    applicationC
+) {
 
     private var _trendingNews: LiveData<PagingData<Article>> = MutableLiveData()
     private var _searchNews: MutableLiveData<List<Article>> = MutableLiveData()
@@ -21,20 +24,24 @@ class MainViewModel(private val repo: Repository) : ViewModel() {
     }
 
     fun getData() {
+
         viewModelScope.launch {
             _trendingNews = repo.getAllNews().cachedIn(viewModelScope)
         }
+
     }
 
     fun searchNews(query: String) {
+
         viewModelScope.launch {
             val response = repo.searchNews(query)
             if (response.isSuccessful && response.body() != null)
-                _searchNews.value = response.body()!!.articles
+                _searchNews.value = response.body()?.articles
         }
+
     }
 
-    fun getAllSavedNews()=repo.getAllSavedNews()
+    fun getAllSavedNews() = repo.getAllSavedNews()
 
     fun saveNewsIntoDB(article: Article) {
         viewModelScope.launch {
@@ -49,7 +56,7 @@ class MainViewModel(private val repo: Repository) : ViewModel() {
     }
 
     fun clearSearchData() {
-        _searchNews.value = emptyList()
+        _searchNews = MutableLiveData()
     }
 
 
