@@ -1,28 +1,28 @@
 package com.example.newsappmvvm
 
-import android.content.Context
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.liveData
-import com.example.newsappmvvm.Remote.Retrofit
+import com.example.newsappmvvm.Remote.NewsApi
 import com.example.newsappmvvm.local_db.NewsDatabase
 import com.example.newsappmvvm.modelData.Article
+import com.example.newsappmvvm.searchPage.SearchPagingSource
 import com.example.newsappmvvm.trendingPage.PagingSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class Repository(context: Context) {
-    private var database: NewsDatabase = NewsDatabase.getInstance(context)
+class Repository @Inject constructor(private val database: NewsDatabase, private val api: NewsApi) {
 
     //remote data source functions
     fun getAllNews() = Pager(
-        config = PagingConfig(pageSize = 20, maxSize = 100, enablePlaceholders = false),
-        pagingSourceFactory = { PagingSource(Retrofit.api) }).liveData
+        config = PagingConfig(pageSize = 20, maxSize = 100, enablePlaceholders = true),
+        pagingSourceFactory = { PagingSource(api) }).liveData
 
 
-    suspend fun searchNews(query: String) = withContext(Dispatchers.IO) {
-        Retrofit.api.searchNews(query)
-    }
+    fun searchNews(query: String) = Pager(
+        config = PagingConfig(pageSize = 20, maxSize = 100, enablePlaceholders = true),
+        pagingSourceFactory = { SearchPagingSource(api, query) }).liveData
 
     //local data source functions
     fun getAllSavedNews() = database.Dao.getAllArticles()

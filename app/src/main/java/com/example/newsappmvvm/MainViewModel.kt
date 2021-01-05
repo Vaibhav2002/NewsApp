@@ -1,42 +1,31 @@
 package com.example.newsappmvvm
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.*
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.newsappmvvm.modelData.Article
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val repo: Repository, val applicationC: Application) : AndroidViewModel(
-    applicationC
-) {
+class MainViewModel @ViewModelInject constructor(private val repo: Repository) : ViewModel() {
 
     private var _trendingNews: LiveData<PagingData<Article>> = MutableLiveData()
-    private var _searchNews: MutableLiveData<List<Article>> = MutableLiveData()
-    val trendingNews: LiveData<PagingData<Article>> get() = _trendingNews
-    val searchNews: LiveData<List<Article>> get() = _searchNews
+
+    val trendingNews get() = _trendingNews
+    val searchNews get() = _searchNews
+
+    val query: MutableLiveData<String> = MutableLiveData()
+    private var _searchNews: LiveData<PagingData<Article>> = query.switchMap {
+        repo.searchNews(query.value.toString()).cachedIn(viewModelScope)
+    }
 
     init {
         getData()
     }
 
     fun getData() {
-
         viewModelScope.launch {
             _trendingNews = repo.getAllNews().cachedIn(viewModelScope)
-        }
-
-    }
-
-    fun searchNews(query: String) {
-
-        viewModelScope.launch {
-            val response = repo.searchNews(query)
-            if (response.isSuccessful && response.body() != null)
-                _searchNews.value = response.body()?.articles
         }
 
     }
@@ -54,10 +43,5 @@ class MainViewModel(private val repo: Repository, val applicationC: Application)
             repo.deleteNews(article)
         }
     }
-
-    fun clearSearchData() {
-        _searchNews = MutableLiveData()
-    }
-
 
 }

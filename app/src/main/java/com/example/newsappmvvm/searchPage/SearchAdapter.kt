@@ -2,14 +2,14 @@ package com.example.newsappmvvm.searchPage
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newsappmvvm.databinding.NewsItemBinding
 import com.example.newsappmvvm.modelData.Article
 
 class SearchAdapter(private val onItemClickListener: onItemClickListener) :
-    ListAdapter<Article, SearchAdapter.SearchNewsViewHolder>(diff()) {
+    PagingDataAdapter<Article, SearchAdapter.SearchNewsViewHolder>(diff()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchNewsViewHolder {
         return SearchNewsViewHolder.from(parent)
